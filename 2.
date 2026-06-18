@@ -20,8 +20,8 @@ class EmpleadoTemporal(Empleado):
         return self.salario * 0.05 if self.meses > 6 else 0
 
 if __name__ == "__main__":
-    g = Gerente("Ana", 5000)
-    et = EmpleadoTemporal("Carlos", 1800, 8)
+    g = Gerente("Adolfo", 5000)
+    et = EmpleadoTemporal("Austriaco", 1800, 8)
     
     print(f"{g.nombre}: Aumento de ${g.calcular_aumento()}")
     print(f"{et.nombre}: Aumento de ${et.calcular_aumento()}")
