@@ -1,0 +1,27 @@
+class Empleado:
+    def __init__(self, nombre, salario, cargo):
+        self.nombre = nombre
+        self.salario = salario
+        self.cargo = cargo
+
+class Gerente(Empleado):
+    def __init__(self, nombre, salario):
+        super().__init__(nombre, salario, "Gerente")
+    
+    def calcular_aumento(self):
+        return self.salario * 0.15
+
+class EmpleadoTemporal(Empleado):
+    def __init__(self, nombre, salario, meses):
+        super().__init__(nombre, salario, "Temporal")
+        self.meses = meses
+    
+    def calcular_aumento(self):
+        return self.salario * 0.05 if self.meses > 6 else 0
+
+if __name__ == "__main__":
+    g = Gerente("Ana", 5000)
+    et = EmpleadoTemporal("Carlos", 1800, 8)
+    
+    print(f"{g.nombre}: Aumento de ${g.calcular_aumento()}")
+    print(f"{et.nombre}: Aumento de ${et.calcular_aumento()}")
