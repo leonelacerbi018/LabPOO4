@@ -1,0 +1,58 @@
+class Tienda:
+    def __init__(self, nombre, direccion):
+        self.nombre = nombre
+        self.direccion = direccion
+        self.inventario = {}
+        self.total_ventas = 0.0
+
+    def agregar_producto(self, producto, cantidad):
+        if producto in self.inventario:
+            self.inventario[producto] += cantidad
+        else:
+            self.inventario[producto] = cantidad
+
+    def eliminar_producto(self, producto):
+        if producto in self.inventario:
+            del self.inventario[producto]
+
+    def mostrar_informacion(self):
+        print(f"Tienda: {self.nombre} | Dirección: {self.direccion} | Ventas Totales: ${self.total_ventas:.2f}")
+
+
+class TiendaRopa(Tienda):
+    def __init__(self, nombre, direccion):
+        super().__init__(nombre, direccion)
+
+    def vender_ropa(self, producto, precio, cantidad):
+        if producto in self.inventario and self.inventario[producto] >= cantidad:
+            self.inventario[producto] -= cantidad
+            self.total_ventas += precio * cantidad
+            if self.inventario[producto] == 0:
+                self.eliminar_producto(producto)
+
+
+class TiendaElectronica(Tienda):
+    def __init__(self, nombre, direccion):
+        super().__init__(nombre, direccion)
+
+    def vender_dispositivo(self, producto, precio, cantidad):
+        if producto in self.inventario and self.inventario[producto] >= cantidad:
+            self.inventario[producto] -= cantidad
+            self.total_ventas += precio * cantidad
+            if self.inventario[producto] == 0:
+                self.eliminar_producto(producto)
+
+
+if __name__ == "__main__":
+    ropa = TiendaRopa("Tienda de ropa", "Boedo 100000000")
+    elec = TiendaElectronica("Mexx", " Boedo 1")
+
+    ropa.agregar_producto("Camisa", 10)
+    ropa.vender_ropa("Camisa", 25.0, 2)
+    ropa.mostrar_informacion()
+
+    print("-" * 50)
+
+    elec.agregar_producto("Celular", 5)
+    elec.vender_dispositivo("Celular", 500.0, 1)
+    elec.mostrar_informacion()
