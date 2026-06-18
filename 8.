@@ -1,0 +1,30 @@
+class Transporte:
+    def __init__(self, capacidad, velocidad_maxima):
+        self.capacidad = capacidad
+        self.velocidad_maxima = velocidad_maxima
+
+
+class Avion(Transporte):
+    def __init__(self, capacidad, velocidad_maxima):
+        super().__init__(capacidad, velocidad_maxima)
+
+    def calcular_tiempo(self, distancia):
+        return distancia / self.velocidad_maxima
+
+
+class Barco(Transporte):
+    def __init__(self, capacidad, velocidad_maxima):
+        super().__init__(capacidad, velocidad_maxima)
+
+    def calcular_tiempo(self, distancia):
+        return distancia / self.velocidad_maxima
+
+
+if __name__ == "__main__":
+    avion = Avion(150, 800)
+    barco = Barco(500, 40)
+
+    distancia_viaje = 2400
+
+    print(f"Avión - Tiempo estimado: {avion.calcular_tiempo(distancia_viaje):.2f} horas")
+    print(f"Barco - Tiempo estimado: {barco.calcular_tiempo(distancia_viaje):.2f} horas")
