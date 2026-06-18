@@ -1,0 +1,34 @@
+from datetime import date
+
+class Producto:
+    def __init__(self, nombre, precio, fecha_vencimiento):
+        self.nombre = nombre
+        self.precio = precio
+        self.fecha_vencimiento = fecha_vencimiento
+
+class ProductoAlimenticio(Producto):
+    def __init__(self, nombre, precio, fecha_vencimiento):
+        super().__init__(nombre, precio, fecha_vencimiento)
+    
+    def aplicar_descuento(self):
+        dias_restantes = (self.fecha_vencimiento - date.today()).days
+        if 0 <= dias_restantes <= 3:
+            return self.precio * 0.70
+        return self.precio
+
+class ProductoElectronico(Producto):
+    def __init__(self, nombre, precio, fecha_vencimiento, meses_garantia):
+        super().__init__(nombre, precio, fecha_vencimiento)
+        self.meses_garantia = meses_garantia
+    
+    def aplicar_descuento(self):
+        if self.meses_garantia < 6:
+            return self.precio * 0.85
+        return self.precio
+
+if __name__ == "__main__":
+    leche = ProductoAlimenticio("Leche", 3000, date(2026, 6, 20)) 
+    tv = ProductoElectronico("Tele", 1000000, date(2029, 12, 31), 3)
+    
+    print(f"{leche.nombre} -> Precio Final: ${leche.aplicar_descuento():.2f}")
+    print(f"{tv.nombre} -> Precio Final: ${tv.aplicar_descuento():.2f}")
