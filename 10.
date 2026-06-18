@@ -1,0 +1,43 @@
+class Pago:
+    def __init__(self, monto, fecha):
+        self.monto = monto
+        self.fecha = fecha
+
+    def mostrar_detalles(self):
+        print(f"Fecha: {self.fecha} | Monto: ${self.monto}")
+
+
+class PagoTarjeta(Pago):
+    def __init__(self, monto, fecha):
+        super().__init__(monto, fecha)
+
+    def procesar_pago(self):
+        total = self.monto * 1.1
+        return f"[Tarjeta] Aprobado. Total con interés: ${total}"
+
+    def generar_recibo(self):
+        return "Recibo de tarjeta generado"
+
+
+class PagoPayPal(Pago):
+    def __init__(self, monto, fecha):
+        super().__init__(monto, fecha)
+
+    def procesar_pago(self):
+        total = self.monto * 0.9
+        return f"[PayPal] Realizado. Total con descuento: ${total}"
+
+    def generar_recibo(self):
+        return "Recibo de PayPal generado"
+
+
+if __name__ == "__main__":
+    mitarjeta = PagoTarjeta(5000, "17/06/2026")
+    cuentapaypal = PagoPayPal(5000, "17/06/2026")
+
+    mitarjeta.mostrar_detalles()
+    print(mitarjeta.procesar_pago())
+    print(mitarjeta.generar_recibo())
+    cuentapaypal.mostrar_detalles()
+    print(cuentapaypal.procesar_pago())
+    print(cuentapaypal.generar_recibo())
