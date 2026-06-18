@@ -1,0 +1,34 @@
+class Vehiculo:
+    def __init__(self, marca, modelo, anio):
+        self.marca = marca
+        self.modelo = modelo
+        self.anio = anio
+
+class Automovil(Vehiculo):
+    def __init__(self, marca, modelo, anio):
+        super().__init__(marca, modelo, anio)
+    
+    def calcular_eficiencia(self):
+        return 12.5 
+    
+    def combustible_viaje(self, distancia):
+        return distancia / self.calcular_eficiencia()
+
+class Motocicleta(Vehiculo):
+    def __init__(self, marca, modelo, anio):
+        super().__init__(marca, modelo, anio)
+    
+    def calcular_eficiencia(self):
+        return 25.0 
+    
+    def combustible_viaje(self, distancia):
+        return distancia / self.calcular_eficiencia()
+
+if __name__ == "__main__":
+    auto = Automovil("Toyota", "Yaris", 2022)
+    moto = Motocicleta("Honda", "Biz", 2023)
+    
+    distancia_viaje = 300 
+    
+    print(f"{auto.marca} {auto.modelo} necesita: {auto.combustible_viaje(distancia_viaje):.2f} litros")
+    print(f"{moto.marca} {moto.modelo} necesita: {moto.combustible_viaje(distancia_viaje):.2f} litros")
